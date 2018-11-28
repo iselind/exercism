@@ -9,12 +9,26 @@ data Planet = Mercury
             | Uranus
             | Neptune
 
+orbitalPeriod :: Planet -> Float
+orbitalPeriod Mercury = 0.2408467
+orbitalPeriod Venus = 0.61519726
+orbitalPeriod Earth = 1.0
+orbitalPeriod Mars = 1.8808158
+orbitalPeriod Jupiter = 11.862615
+orbitalPeriod Saturn = 29.447498
+orbitalPeriod Uranus = 84.016846
+orbitalPeriod Neptune = 164.79132
+
 ageOn :: Planet -> Float -> Float
-ageOn Mercury seconds = (ageOn Earth seconds) / 0.2408467
-ageOn Venus seconds = (ageOn Earth seconds) / 0.61519726
-ageOn Earth seconds = seconds / 31557600
-ageOn Mars seconds = (ageOn Earth seconds) / 1.8808158
-ageOn Jupiter seconds = (ageOn Earth seconds) / 11.862615
-ageOn Saturn seconds = (ageOn Earth seconds) / 29.447498
-ageOn Uranus seconds = (ageOn Earth seconds) / 84.016846
-ageOn Neptune seconds = (ageOn Earth seconds) / 164.79132
+ageOn planet seconds = (seconds / 31557600) / (orbitalPeriod planet)
+
+-- Another way to accomplish this:
+--
+-- ageOn :: Planet -> Float -> Float
+-- ageOn Earth seconds = seconds / 31557600
+-- ageOn planet seconds = (ageOn Earth seconds) / (orbitalPeriod planet)
+--
+-- The advantage this brings is that it's more clear to me where the division
+-- with 31557600 comes from and as Earth is a base case, it's also calculated
+-- without having to divide at all.
+
