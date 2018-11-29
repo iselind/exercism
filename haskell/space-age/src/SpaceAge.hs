@@ -1,5 +1,7 @@
 module SpaceAge (Planet(..), ageOn) where
 
+-- Types
+
 data Planet = Mercury
             | Venus
             | Earth
@@ -9,26 +11,25 @@ data Planet = Mercury
             | Uranus
             | Neptune
 
+type Seconds = Float
+type Years = Float
+
+-- Constants
+
+earthYear :: Seconds
+earthYear = 60 * 60 * 24 * 365.25
+
 orbitalPeriod :: Planet -> Float
-orbitalPeriod Mercury = 0.2408467
-orbitalPeriod Venus = 0.61519726
-orbitalPeriod Earth = 1.0
-orbitalPeriod Mars = 1.8808158
-orbitalPeriod Jupiter = 11.862615
-orbitalPeriod Saturn = 29.447498
-orbitalPeriod Uranus = 84.016846
-orbitalPeriod Neptune = 164.79132
+orbitalPeriod Mercury = earthYear * 0.2408467
+orbitalPeriod Venus = earthYear * 0.61519726
+orbitalPeriod Earth = earthYear
+orbitalPeriod Mars = earthYear * 1.8808158
+orbitalPeriod Jupiter = earthYear * 11.862615
+orbitalPeriod Saturn = earthYear * 29.447498
+orbitalPeriod Uranus = earthYear * 84.016846
+orbitalPeriod Neptune = earthYear * 164.79132
 
-ageOn :: Planet -> Float -> Float
-ageOn planet seconds = (seconds / 31557600) / (orbitalPeriod planet)
+-- Functions
 
--- Another way to accomplish this:
---
--- ageOn :: Planet -> Float -> Float
--- ageOn Earth seconds = seconds / 31557600
--- ageOn planet seconds = (ageOn Earth seconds) / (orbitalPeriod planet)
---
--- The advantage this brings is that it's more clear to me where the division
--- with 31557600 comes from and as Earth is a base case, it's also calculated
--- without having to divide at all.
-
+ageOn :: Planet -> Seconds -> Years
+ageOn planet seconds = seconds / orbitalPeriod planet
