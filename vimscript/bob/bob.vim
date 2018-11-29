@@ -11,7 +11,7 @@ function! Answer(drivel) abort
 
   " ==# will match with case in mind
   " ==? will match withput case in mind
-  if a:drivel ==# toupper(a:drivel)
+  if a:drivel ==# toupper(a:drivel) && a:drivel !=# tolower(a:drivel)
       return "Whoa, chill out!"
   endif
 
@@ -19,6 +19,10 @@ function! Answer(drivel) abort
       return "Sure."
   endif
 
+  " I just need to define trim()...
+  " if len(trim(a:drivel)) == 0
+  "     return "Fine. Be that way!
+  " endif
 
   return "Whatever."
 endfunction
