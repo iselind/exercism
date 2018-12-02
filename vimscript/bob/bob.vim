@@ -19,10 +19,10 @@ function! Answer(drivel) abort
       return "Sure."
   endif
 
-  " I just need to define trim()...
-  " if len(trim(a:drivel)) == 0
-  "     return "Fine. Be that way!
-  " endif
+  " Match both the empty string and strings only containing whitespace
+  if a:drivel =~ "^\s*$"
+      return "Fine. Be that way!"
+  endif
 
   return "Whatever."
 endfunction
