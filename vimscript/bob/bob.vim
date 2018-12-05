@@ -20,7 +20,7 @@ function! Answer(drivel) abort
   endif
 
   " Match both the empty string and strings only containing whitespace
-  if a:drivel =~ "^\s*$"
+  if a:drivel =~ "^\\s*$"
       return "Fine. Be that way!"
   endif
 
