@@ -3,7 +3,7 @@ module Bob (responseFor) where
 import Data.Char
 
 isQuestion :: String -> Bool
-isQuestion xs = '?' == (last xs)
+isQuestion xs = (not $ null xs) && ('?' == (last xs))
 
 isYelling :: String -> Bool
 isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
