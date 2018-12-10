@@ -9,9 +9,12 @@ isYelling :: String -> Bool
 isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
 
 isJibberish :: String -> Bool
-isJibberish (' ':_) = True
-isJibberish ('\t':_) = True
-isJibberish xs = null xs
+isJibberish (' ':xs) =isJibberish xs
+isJibberish ('\t':xs) = isJibberish xs
+isJibberish ('\n':xs) = isJibberish xs
+isJibberish ('\r':xs) = isJibberish xs
+isJibberish [] = True
+isJibberish _ = False
 
 responseFor :: String -> String
 responseFor xs
