@@ -13,11 +13,8 @@
 "   :echo ToRna('ACGTGGTCTTAA')
 "   UGCACCAGAAUU
 "
-function! ToRna(strand) abort
-    if len(a:strand) == 0
-        return ""
-    endif
 
+function! Translate(strand) abort
     if a:strand == 'G'
         return "C"
     elseif a:strand == 'C'
@@ -29,4 +26,22 @@ function! ToRna(strand) abort
     else
         return ""
     endif
+endfunction
+
+function! ToRna(strand) abort
+    if len(a:strand) == 0
+        return ""
+    endif
+
+    let result = []
+
+    for c in range(0, len(a:strand))
+        let tmp = Translate(a:strand[c])
+        if tmp == ' '
+            return ""
+        endif
+        call add(result, tmp)
+    endfor
+
+    return join(result, '')
 endfunction
