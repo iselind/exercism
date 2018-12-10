@@ -2,12 +2,19 @@ module Bob (responseFor) where
 
 import Data.Char
 
-isQuestion :: String -> Bool
-isQuestion xs = (not $ null xs) && ('?' == (last xs))
+-- myLast return the last character in xs skipping spaces at the end
+myLast :: String -> Char
+myLast xs = head $ dropWhile (== ' ') (reverse xs)
 
+-- isQuestion returns True if xs is a question, i.e. it ends with a question mark
+isQuestion :: String -> Bool
+isQuestion xs = (not $ null xs) && ('?' == (myLast xs))
+
+-- isYelling returns True if all characters available in different case are in the upper case only
 isYelling :: String -> Bool
 isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
 
+-- isJibberish returns True if there is only whitespace in the inparameter
 isJibberish :: String -> Bool
 isJibberish (' ':xs) =isJibberish xs
 isJibberish ('\t':xs) = isJibberish xs
