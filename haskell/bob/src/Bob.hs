@@ -14,18 +14,13 @@ isQuestion xs = (not $ null xs) && ('?' == (myLast xs))
 isYelling :: String -> Bool
 isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
 
--- isJibberish returns True if there is only whitespace in the inparameter
-isJibberish :: String -> Bool
-isJibberish (' ':xs) =isJibberish xs
-isJibberish ('\t':xs) = isJibberish xs
-isJibberish ('\n':xs) = isJibberish xs
-isJibberish ('\r':xs) = isJibberish xs
-isJibberish [] = True
-isJibberish _ = False
+-- isSilent returns True if there is only whitespace in the inparameter
+isSilent :: String -> Bool
+isSilent xs = all isSpace xs
 
 responseFor :: String -> String
 responseFor xs
-    | (isJibberish xs) = "Fine. Be that way!"
+    | (isSilent xs) = "Fine. Be that way!"
     | (isYelling xs) && (isQuestion xs) = "Calm down, I know what I'm doing!"
     | (isQuestion xs) = "Sure."
     | (isYelling xs) = "Whoa, chill out!"
