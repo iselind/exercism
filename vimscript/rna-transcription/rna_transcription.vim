@@ -23,9 +23,8 @@ function! Translate(strand) abort
         return "A"
     elseif a:strand == 'A'
         return "U"
-    else
-        return ""
     endif
+    return ""
 endfunction
 
 function! ToRna(strand) abort
@@ -35,9 +34,23 @@ function! ToRna(strand) abort
 
     let result = []
 
-    for c in range(0, len(a:strand))
+    " range will produce list from zero up until, and including, the length of
+    " a:strand.
+    "
+    " An example is `range(0, len("abcde"))` would produce `[0,1,2,3,4,5]`
+    " i.e. a string of five characters produce a range of six elements.
+    " "abcd"[0] == 'a'
+    " "abcd"[1] == 'b'
+    " "abcd"[2] == 'c'
+    " "abcd"[3] == 'd'
+    " "abcd"[4] == 'e'
+    " "abcd"[5] == ' ' (Index out of bounds!)
+    "
+    " As we use the list as indices we subract by one to not go
+    " outside a:strand
+    for c in range(0, len(a:strand)-1)
         let tmp = Translate(a:strand[c])
-        if tmp == ' '
+        if tmp == ""
             return ""
         endif
         call add(result, tmp)
