@@ -15,9 +15,12 @@
 "
 
 function! ToRna(strand) abort
+    let DNA_CHARS = "GCTA"
+    let RNA_CHARS = "CGAU"
+
     if a:strand =~ "\[^GCTA\]"
         return ""
     endif
 
-    return tr(a:strand, "GCTA", "CGAU")
+    return tr(a:strand, DNA_CHARS, RNA_CHARS)
 endfunction
