@@ -1,27 +1,21 @@
 module Bob (responseFor) where
 
 import Data.Char
-
--- myLast return the last character in xs skipping spaces at the end
-myLast :: String -> Char
-myLast xs = head $ dropWhile (== ' ') (reverse xs)
+import Data.List
 
 -- isQuestion returns True if xs is a question, i.e. it ends with a question mark
 isQuestion :: String -> Bool
-isQuestion xs = (not $ null xs) && ('?' == (myLast xs))
+isQuestion xs = "?" `isSuffixOf` xs
 
 -- isYelling returns True if all characters available in different case are in the upper case only
 isYelling :: String -> Bool
 isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
 
--- isSilent returns True if there is only whitespace in the inparameter
-isSilent :: String -> Bool
-isSilent xs = all isSpace xs
-
 responseFor :: String -> String
 responseFor xs
-    | (isSilent xs) = "Fine. Be that way!"
-    | (isYelling xs) && (isQuestion xs) = "Calm down, I know what I'm doing!"
-    | (isQuestion xs) = "Sure."
-    | (isYelling xs) = "Whoa, chill out!"
+    | (null shaved) = "Fine. Be that way!"
+    | (isYelling shaved) && (isQuestion shaved) = "Calm down, I know what I'm doing!"
+    | (isQuestion shaved) = "Sure."
+    | (isYelling shaved) = "Whoa, chill out!"
     | otherwise = "Whatever."
+    where shaved = filter (not . isSpace) xs
