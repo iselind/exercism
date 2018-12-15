@@ -12,7 +12,7 @@ isQuestion xs = (not $ null xs) && ('?' == (myLast xs))
 
 -- isYelling returns True if all characters available in different case are in the upper case only
 isYelling :: String -> Bool
-isYelling xs = ((map toUpper xs) == xs) && ((map toLower xs) /= xs )
+isYelling xs = any isUpper xs && not (any isLower xs)
 
 -- isSilent returns True if there is only whitespace in the inparameter
 isSilent :: String -> Bool
