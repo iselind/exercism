@@ -118,6 +118,14 @@ cases = [ Case { description = "stating something"
                , input       = "\n\r \t"
                , expected    = "Fine. Be that way!"
                }
+        , Case { description = "Some lower swedish non-ascii"
+               , input       = "åäö"
+               , expected    = "Whatever."
+               }
+        , Case { description = "Some upper swedish non-ascii"
+               , input       = "ÅÄÖ"
+               , expected    = "Whoa, chill out!"
+               }
         , Case { description = "non-question ending with whitespace"
                , input       = "This is a statement ending with whitespace      "
                , expected    = "Whatever."
