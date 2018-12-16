@@ -11,7 +11,7 @@ function! Anagram(word, candidates) abort
     let result = []
 
     for candidate in a:candidates
-        if a:word ==# candidate
+        if a:word == candidate
             continue
         endif
 
