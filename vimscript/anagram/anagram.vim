@@ -25,6 +25,6 @@ function! Anagram(word, candidates) abort
         endif
     endfor
 
-    return result
+    return sort(result)
 
 endfunction
