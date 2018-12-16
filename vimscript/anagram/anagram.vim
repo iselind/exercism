@@ -6,6 +6,21 @@
 "   :echo Anagram('foo', ['foo', 'bar', 'oof', 'Ofo'])
 "   ['Ofo', 'oof']
 "
+
+" GarbleWord will sort the characters, as lower case characters, in word
+function! GarbleWord(word)
+    " The case of each character affects the sorting that will happen at the
+    " end of this function, so make everything into lower case.
+    let lowerWord = tolower(a:word)
+
+    " The usage of the split function here, was taken from the split() docs.
+    "
+    " See `:he \\zs` for details about the pattern .
+    let wordLst = split(lowerWord, '\zs')
+
+    return join(sort(wordLst), "")
+endfunction
+
 function! Anagram(word, candidates) abort
 
     let result = []
@@ -17,12 +32,7 @@ function! Anagram(word, candidates) abort
             continue
         endif
 
-        " These split functions are taken from the split() docs
-        let wordLst = split(a:word, '\zs')
-        let candidateLst = split(candidate, '\zs')
-
-        if join(sort(wordLst), "") ==? join(sort(candidateLst), "")
-            echo "Match!" candidate
+        if GarbleWord(a:word) ==? GarbleWord(candidate)
             call add(result, candidate)
         endif
     endfor
