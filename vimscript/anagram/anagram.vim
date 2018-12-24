@@ -7,8 +7,8 @@
 "   ['Ofo', 'oof']
 "
 
-" GarbleWord will sort the characters, as lower case characters, in word
-function! GarbleWord(word)
+" ConvertToMatchable will sort the characters, as lower case characters, in word
+function! ConvertToMatchable(word)
     " The case of each character affects the sorting that will happen at the
     " end of this function, so make everything into lower case.
     let lowerWord = tolower(a:word)
@@ -16,9 +16,9 @@ function! GarbleWord(word)
     " The usage of the split function here, was taken from the split() docs.
     "
     " See `:he \\zs` for details about the pattern .
-    let wordLst = split(lowerWord, '\zs')
+    let charList = split(lowerWord, '\zs')
 
-    return join(sort(wordLst), "")
+    return join(sort(charList), "")
 endfunction
 
 function! Anagram(word, candidates) abort
@@ -32,7 +32,7 @@ function! Anagram(word, candidates) abort
             continue
         endif
 
-        if GarbleWord(a:word) ==? GarbleWord(candidate)
+        if ConvertToMatchable(a:word) ==? ConvertToMatchable(candidate)
             call add(result, candidate)
         endif
     endfor
