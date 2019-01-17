@@ -25,6 +25,8 @@ endfunction
 function! Anagram(word, candidates) abort
     let result = []
 
+    let comparableWord = ConvertToMatchable(a:word)
+
     " ==# will match with case in mind
     " ==? will match withput case in mind
     for candidate in a:candidates
@@ -32,7 +34,7 @@ function! Anagram(word, candidates) abort
             continue
         endif
 
-        if ConvertToMatchable(a:word) ==? ConvertToMatchable(candidate)
+        if comparableWord ==? ConvertToMatchable(candidate)
             call add(result, candidate)
         endif
     endfor
