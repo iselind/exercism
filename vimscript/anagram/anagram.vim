@@ -7,7 +7,8 @@
 "   ['Ofo', 'oof']
 "
 
-" ConvertToMatchable will sort the characters, as lower case characters, in word
+" ConvertToMatchable will convert word into something that is easy to compare.
+" It converts word to lower case characters and sort the characters
 function! ConvertToMatchable(word)
     " The case of each character affects the sorting that will happen at the
     " end of this function, so make everything into lower case.
@@ -22,7 +23,6 @@ function! ConvertToMatchable(word)
 endfunction
 
 function! Anagram(word, candidates) abort
-
     let result = []
 
     " ==# will match with case in mind
@@ -38,5 +38,4 @@ function! Anagram(word, candidates) abort
     endfor
 
     return sort(result)
-
 endfunction
