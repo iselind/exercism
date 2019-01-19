@@ -22,11 +22,12 @@ stringToNucleotides (x:xs)
     | x == 'G' = G : stringToNucleotides xs
     | x == 'T' = T : stringToNucleotides xs
 
-count :: [Nucleotide] -> Map Nucleotide Int-> Either String (Map Nucleotide Int)
-count [] result = Right result
+count :: [Nucleotide] -> Map Nucleotide Int-> Map Nucleotide Int
+count [] result = result
 count (x:xs) result = count xs (Map.insert x ((result ! x)+1) result)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
 nucleotideCounts xs
     | isNucleoticeString xs == False = Left "Bad character in input"
-    | otherwise = count (stringToNucleotides xs) (Map.fromList([(A,0),(C,0),(G,0),(T,0)]))
+    | otherwise = Right answer
+    where answer = count (stringToNucleotides xs) (Map.fromList([(A,0),(C,0),(G,0),(T,0)]))
