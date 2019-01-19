@@ -1,7 +1,7 @@
 module DNA (nucleotideCounts, Nucleotide(..)) where
 
-import Data.Map (Map,(!))
-import qualified Data.Map as Map
+import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
@@ -24,7 +24,7 @@ stringToNucleotides (x:xs)
 
 count :: [Nucleotide] -> Map Nucleotide Int-> Map Nucleotide Int
 count [] result = result
-count (x:xs) result = count xs (Map.insert x ((result ! x)+1) result)
+count (x:xs) result = count xs (Map.insertWith (+) x 1 result)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
 nucleotideCounts xs
