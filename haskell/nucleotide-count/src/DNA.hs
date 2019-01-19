@@ -20,6 +20,7 @@ stringToNucleotides ('A':xs) = A : stringToNucleotides xs
 stringToNucleotides ('C':xs) = C : stringToNucleotides xs
 stringToNucleotides ('G':xs) = G : stringToNucleotides xs
 stringToNucleotides ('T':xs) = T : stringToNucleotides xs
+stringToNucleotides (_:xs) = stringToNucleotides xs
 
 -- Given a Map and a Nucleotide, update the Map accordingly
 count :: Map Nucleotide Int -> Nucleotide -> Map Nucleotide Int
