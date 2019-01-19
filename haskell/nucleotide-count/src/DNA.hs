@@ -5,13 +5,28 @@ import qualified Data.Map as Map
 
 data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
-count :: String -> Map Nucleotide Int-> Either String (Map Nucleotide Int)
+isNucleoticeString :: String -> Bool
+isNucleoticeString [] =  True
+isNucleoticeString (x:xs)
+    | x == 'A' = isNucleoticeString xs
+    | x == 'C' = isNucleoticeString xs
+    | x == 'G' = isNucleoticeString xs
+    | x == 'T' = isNucleoticeString xs
+    | otherwise = False
+
+stringToNucleotides :: String -> [Nucleotide]
+stringToNucleotides [] = []
+stringToNucleotides (x:xs)
+    | x == 'A' = A : stringToNucleotides xs
+    | x == 'C' = C : stringToNucleotides xs
+    | x == 'G' = G : stringToNucleotides xs
+    | x == 'T' = T : stringToNucleotides xs
+
+count :: [Nucleotide] -> Map Nucleotide Int-> Either String (Map Nucleotide Int)
 count [] result = Right result
-count ('A':xs) result = count xs (Map.insert A ((result ! A)+1) result)
-count ('C':xs) result = count xs (Map.insert C ((result ! C)+1) result)
-count ('G':xs) result = count xs (Map.insert G ((result ! G)+1) result)
-count ('T':xs) result = count xs (Map.insert T ((result ! T)+1) result)
-count (_:xs) result = Left "Bad character in input"
+count (x:xs) result = count xs (Map.insert x ((result ! x)+1) result)
 
 nucleotideCounts :: String -> Either String (Map Nucleotide Int)
-nucleotideCounts xs = count xs (Map.fromList([(A,0),(C,0),(G,0),(T,0)]))
+nucleotideCounts xs
+    | isNucleoticeString xs == False = Left "Bad character in input"
+    | otherwise = count (stringToNucleotides xs) (Map.fromList([(A,0),(C,0),(G,0),(T,0)]))
