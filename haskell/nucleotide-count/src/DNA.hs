@@ -7,21 +7,19 @@ data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 
 -- Check if a string characters correspond to a Nucleotide
 isNucleoticeStringCharacter :: Char -> Bool
-isNucleoticeStringCharacter x
-    | x == 'A' = True
-    | x == 'C' = True
-    | x == 'G' = True
-    | x == 'T' = True
-    | otherwise = False
+isNucleoticeStringCharacter 'A' = True
+isNucleoticeStringCharacter 'C' = True
+isNucleoticeStringCharacter 'G' = True
+isNucleoticeStringCharacter 'T' = True
+isNucleoticeStringCharacter _ = False
 
 -- Convert a string of characters to a list of Nucleotides
 stringToNucleotides :: String -> [Nucleotide]
 stringToNucleotides [] = []
-stringToNucleotides (x:xs)
-    | x == 'A' = A : stringToNucleotides xs
-    | x == 'C' = C : stringToNucleotides xs
-    | x == 'G' = G : stringToNucleotides xs
-    | x == 'T' = T : stringToNucleotides xs
+stringToNucleotides ('A':xs) = A : stringToNucleotides xs
+stringToNucleotides ('C':xs) = C : stringToNucleotides xs
+stringToNucleotides ('G':xs) = G : stringToNucleotides xs
+stringToNucleotides ('T':xs) = T : stringToNucleotides xs
 
 -- Given a Map and a Nucleotide, update the Map accordingly
 count :: Map Nucleotide Int -> Nucleotide -> Map Nucleotide Int
