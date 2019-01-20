@@ -27,7 +27,7 @@ toNucleotide _ = A -- What to do in this case?
 
 -- Convert a string of characters to a list of Nucleotides
 stringToNucleotides :: String -> [Nucleotide]
-stringToNucleotides x = map toNucleotide x
+stringToNucleotides x = map toNucleotide x -- Why would Data.List.map be better here than using 'normal' map?
 
 -- Given a Map and a Nucleotide, update the Map accordingly
 count :: Map Nucleotide Int -> Nucleotide -> Map Nucleotide Int
