@@ -14,20 +14,16 @@ data Nucleotide = A | C | G | T deriving (Eq, Ord, Show)
 isNucleoticeStringCharacter :: Char -> Bool
 isNucleoticeStringCharacter x = x `List.elem` "ACGT"
 
--- This function doesn't cover all characters, not sure how to deal with that
--- when using this in map. toNucleotide is only used in this file and it's not
--- exported, so in some sense it's safe. If it were exported, how would I make
--- it safe for all characters?
 toNucleotide :: Char -> Nucleotide
 toNucleotide 'A' = A
 toNucleotide 'C' = C
 toNucleotide 'G' = G
 toNucleotide 'T' = T
-toNucleotide _ = A -- What to do in this case?
+toNucleotide _ = error "No matching Nucleotide found"
 
 -- Convert a string of characters to a list of Nucleotides
 stringToNucleotides :: String -> [Nucleotide]
-stringToNucleotides x = map toNucleotide x -- Why would Data.List.map be better here than using 'normal' map?
+stringToNucleotides x = map toNucleotide x
 
 -- Given a Map and a Nucleotide, update the Map accordingly
 count :: Map Nucleotide Int -> Nucleotide -> Map Nucleotide Int
