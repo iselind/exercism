@@ -17,16 +17,16 @@ specs = do
           it "add student" $
             sorted (add 2 "Aimee" empty) `shouldBe` [(2, ["Aimee"])]
 
-          it "add more students in same class" $
-            sorted (fromGrade 2 ["James", "Blair", "Paul"])
-            `shouldBe` [(2, ["Blair", "James", "Paul"])]
-
           it "add students to different grades" $
             sorted (fromList [(3, "Chelsea"), (7, "Logan")])
             `shouldBe` [(3, ["Chelsea"]), (7, ["Logan"])]
 
           it "empty list if no students" $
             sorted empty `shouldBe` []
+
+          it "add more students in same class" $
+            sorted (fromGrade 2 ["James", "Blair", "Paul"])
+            `shouldBe` [(2, ["Blair", "James", "Paul"])]
 
           it "get students in a grade" $
             grade 5 (fromList [(5, "Franklin"), (5, "Bradley"), (1, "Jeff")])

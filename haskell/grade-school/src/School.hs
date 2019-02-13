@@ -1,5 +1,7 @@
 module School (School, add, empty, grade, sorted) where
 
+import Data.List (sortBy)
+
 -- A school is a list of grades, in each grade we have a list of
 -- students
 data School = Grade Int [String] School | Empty deriving (Show)
@@ -19,5 +21,10 @@ grade gradeNum (Grade num members school)
     | gradeNum == num = members
     | otherwise = grade gradeNum school
 
+unsorted :: School -> [(Int, [String])]
+unsorted Empty = []
+unsorted (Grade num members school) = (num, members) : sorted school
+
 sorted :: School -> [(Int, [String])]
-sorted school = error "You need to implement this function."
+sorted Empty = []
+sorted school = sortBy (\(a,_) (b,_) -> compare a b) (unsorted school)
