@@ -26,11 +26,7 @@ endfunction
 function! WordCount(phrase) abort
     let result = {}
 
-    for word in split(a:phrase, "[ ,\n]")
-        if strlen(word) == 0
-            continue
-        endif
-
+    for word in split(a:phrase, "[ ,\n]\\+")
         let word = CleanWord(word)
         let result[word] = 1 + get(result, word, 0)
     endfor
