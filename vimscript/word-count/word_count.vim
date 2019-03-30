@@ -7,6 +7,22 @@
 "   :echo WordCount('olly olly in come free')
 "   {'olly': 2, 'come': 1, 'in': 1, 'free': 1}
 "
+
+function! CleanWord(word) abort
+    let word = tolower(a:word)
+    let word = substitute(word, '[!&:.@$%^]', '', 'g')
+
+    if word[0] == "'"
+        let word = word[1:]
+    endif
+
+    let lastIndex = strlen(word)-1
+    if word[lastIndex] == "'"
+        let word = word[:lastIndex-1]
+    endif
+    return word
+endfunction
+
 function! WordCount(phrase) abort
     let result = {}
 
@@ -15,18 +31,7 @@ function! WordCount(phrase) abort
             continue
         endif
 
-        let word = tolower(word)
-        let word = substitute(word, '[!&:.@$%^]', '', 'g')
-
-        if word[0] == "'"
-            let word = word[1:]
-        endif
-
-        let lastIndex = strlen(word)-1
-        if word[lastIndex] == "'"
-            let word = word[:lastIndex-1]
-        endif
-
+        let word = CleanWord(word)
         let result[word] = 1 + get(result, word, 0)
     endfor
 
