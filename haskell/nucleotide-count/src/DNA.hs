@@ -23,7 +23,7 @@ toNucleotide _ = error "No matching Nucleotide found"
 
 -- Convert a string of characters to a list of Nucleotides
 stringToNucleotides :: String -> [Nucleotide]
-stringToNucleotides x = map toNucleotide x
+stringToNucleotides = map toNucleotide
 
 -- Given a Map and a Nucleotide, update the Map accordingly
 count :: Map Nucleotide Int -> Nucleotide -> Map Nucleotide Int
@@ -34,4 +34,4 @@ nucleotideCounts :: String -> Either String (Map Nucleotide Int)
 nucleotideCounts xs
     | not (all isNucleoticeStringCharacter xs) = Left "Bad character in input"
     | otherwise = Right answer
-    where answer = foldl count (Map.fromList([(A,0),(C,0),(G,0),(T,0)])) (stringToNucleotides xs)
+    where answer = foldl count (Map.fromList [(A,0),(C,0),(G,0),(T,0)]) (stringToNucleotides xs)
