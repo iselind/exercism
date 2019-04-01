@@ -52,3 +52,8 @@ Execute (with quotations):
   let phrase   = "Joe can't tell between 'large' and large."
   let expected = {'joe': 1, 'can''t': 1, 'tell': 1, 'between': 1, 'large': 2, 'and': 1}
   AssertEqual expected, WordCount(phrase)
+
+Execute (just quote at the end of word):
+  let phrase   = "Jonas' dog likes blue balls"
+  let expected = {'jonas''': 1, 'dog': 1, 'likes': 1, 'blue': 1, 'balls': 1}
+  AssertEqual expected, WordCount(phrase)

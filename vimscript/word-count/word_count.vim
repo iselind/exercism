@@ -12,14 +12,13 @@ function! CleanWord(word) abort
     let word = tolower(a:word)
     let word = substitute(word, '[!&:.@$%^]', '', 'g')
 
-    if word[0] == "'"
+    let lastIndex = strlen(word)-1
+    if word[0] == "'" && word[lastIndex] == "'"
+        echo word
+        let word = word[:lastIndex-1]
         let word = word[1:]
     endif
 
-    let lastIndex = strlen(word)-1
-    if word[lastIndex] == "'"
-        let word = word[:lastIndex-1]
-    endif
     return word
 endfunction
 
