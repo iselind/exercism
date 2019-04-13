@@ -1,12 +1,12 @@
 module SumOfMultiples (sumOfMultiples) where
 
--- is a a factor in b?
-isFactorOf :: Integer -> Integer -> Bool
-isFactorOf a b = b `mod` a == 0
+import Data.List
 
 sumOfMultiples :: [Integer] -> Integer -> Integer
-sumOfMultiples factors limit = error "You need to implement this function."
+sumOfMultiples factors limit = sum $ nub $ concat $ map (mylist (limit-1)) factors
 
+mylist :: (Num a, Enum a) => a -> a -> [a]
+mylist limit x = [x,2*x..limit]
 
 -- Produce a list of predicate functions
 -- map isFactorOf [3,5]
