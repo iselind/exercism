@@ -6,7 +6,7 @@ import Data.List (nub)
 -- concat() takes a list of lists and flattens it to a list
 
 sumOfMultiples :: [Integer] -> Integer -> Integer
-sumOfMultiples factors limit = sum $ nub $ concat $ map (mylist themax) filteredFactors
+sumOfMultiples factors limit = sum $ nub $ concatMap (mylist themax) filteredFactors
     where themax = limit -1
           filteredFactors = filter (>0) factors
 
