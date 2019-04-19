@@ -12,29 +12,34 @@
 "   22
 "
 function! DifferenceOfSquares(number) abort
-  " your implemention goes here
+    return SquareOfSum(a:number) - SumOfSquares(a:number)
 endfunction
 
 function! SquareOfSum(number) abort
-    echom "=====" a:number
-
     let runningSum = 0
     let term = 1
 
     while term <= a:number
-        echom runningSum
         let runningSum += term
         let term += 1
     endwhile
 
     let runningSum = runningSum * runningSum
 
-    echom runningSum
-    echom "====="
-
     return runningSum
 endfunction
 
 function! SumOfSquares(number) abort
-  " your implemention goes here
+    let runningSum = 0
+    let term = 1
+
+    while term <= a:number
+        let squaredTerm = term * term
+
+        let runningSum += squaredTerm
+
+        let term += 1
+    endwhile
+
+    return runningSum
 endfunction
