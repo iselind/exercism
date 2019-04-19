@@ -1,12 +1,12 @@
 module SumOfMultiples (sumOfMultiples) where
 
 -- nub removes duplicate entries, keeping the first occurrence
-import Data.List (nub)
+import Data.List (union)
 
 -- concat() takes a list of lists and flattens it to a list
 
 sumOfMultiples :: [Integer] -> Integer -> Integer
-sumOfMultiples factors limit = sum $ nub $ concatMap (mylist themax) filteredFactors
+sumOfMultiples factors limit = sum $ (foldr union []) $ map (mylist themax) filteredFactors
     where themax = limit -1
           filteredFactors = filter (>0) factors
 
