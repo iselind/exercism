@@ -18,21 +18,21 @@ endfunction
 function! SquareOfSum(number) abort
     echom "=====" a:number
 
-    let tmp = 0
+    let runningSum = 0
     let term = 1
 
     while term <= a:number
-        echom tmp
-        let tmp += term
+        echom runningSum
+        let runningSum += term
         let term += 1
     endwhile
 
-    let tmp = tmp * tmp
+    let runningSum = runningSum * runningSum
 
-    echom tmp
+    echom runningSum
     echom "====="
 
-    return tmp
+    return runningSum
 endfunction
 
 function! SumOfSquares(number) abort
