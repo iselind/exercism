@@ -15,31 +15,21 @@ function! DifferenceOfSquares(number) abort
     return SquareOfSum(a:number) - SumOfSquares(a:number)
 endfunction
 
-function! SquareOfSum(number) abort
+function! Sum(numbers, sumFunc) abort
     let runningSum = 0
-    let term = 1
 
-    while term <= a:number
-        let runningSum += term
-        let term += 1
-    endwhile
-
-    let runningSum = runningSum * runningSum
+    for element in a:numbers
+        let runningSum += a:sumFunc(element)
+    endfor
 
     return runningSum
 endfunction
 
+function! SquareOfSum(number) abort
+    let sum = Sum(range(1,a:number), {a->a})
+    return sum * sum
+endfunction
+
 function! SumOfSquares(number) abort
-    let runningSum = 0
-    let term = 1
-
-    while term <= a:number
-        let squaredTerm = term * term
-
-        let runningSum += squaredTerm
-
-        let term += 1
-    endwhile
-
-    return runningSum
+    return Sum(range(1,a:number), {a->a*a})
 endfunction
