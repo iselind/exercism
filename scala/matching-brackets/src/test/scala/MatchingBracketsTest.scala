@@ -56,12 +56,10 @@ class MatchingBracketsTest extends FunSuite with Matchers {
   }
 
   test("math expression") {
-    pending
     MatchingBrackets.isPaired("(((185 + 223.85) * 15) - 543)/2") should be(true)
   }
 
   test("complex latex expression") {
-    pending
     MatchingBrackets.isPaired(
       """\left(\begin{array}{cc} \frac{1}{3} & x\ \mathrm{e}^{x} &... x^2 \end{array}\right)""") should be(
       true)

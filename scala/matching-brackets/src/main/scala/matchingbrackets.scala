@@ -1,38 +1,48 @@
-object MatchingBrackets {
-  def isPaired(data: String): Boolean = {
-    var bracketCount:Int = 0
-    var curlyCount:Int = 0
-    var parentesisCount:Int = 0
-    var otherCharacters:Int = 0
-    for (c <- data) {
-      c match {
-        case '(' => parentesisCount += 1
-        case ')' => {
-          parentesisCount -= 1
-          if (parentesisCount < 0) {
-            return false
-          }
-        }
-        case '{' => curlyCount += 1
-        case '}' => {
-          curlyCount -= 1
-          if (curlyCount < 0) {
-            return false
-          }
-        }
-        case '[' => {
-          bracketCount += 1
-        }
-        case ']' => {
-          bracketCount -= 1
-          if (bracketCount < 0) {
-            return false
-          }
-        }
-        case _ => otherCharacters += 1
-      }
-    }
+import java.lang.Throwable
+import java.util.NoSuchElementException
+import scala.collection.mutable.Map
+import scala.collection.mutable.Stack
 
-    bracketCount == 0 && curlyCount == 0
+object MatchingBrackets {
+  // matchingPairs enables us to look up what the matching start character of
+  // the pair would be
+  val matchingPairs = {
+    val m = Map[Char, Char]()
+    m.put('}', '{')
+    m.put(')', '(')
+    m.put(']', '[')
+    m
+  }
+
+  // isPaired will return true if all the parenthesis are matched properly,
+  // otherwise false will be returned
+  def isPaired(data: String): Boolean = {
+    var s = Stack[Char]()
+
+    try {
+      for (c <- data) {
+        c match {
+          case '(' | '[' | '{' => s.push(c)
+          case ')' | ']' | '}' => {
+            val cShouldMatchWith = s.pop
+            val theChar = MatchingBrackets.matchingPairs.get(c)
+            theChar match {
+              case Some(b) => {
+                if (cShouldMatchWith != b) {
+                  return false
+                }
+              }
+              case None => {
+                throw new RuntimeException("Unexpected character encountered: " + c)
+              }
+            }
+          }
+          case _ =>
+        }
+      }
+      s.isEmpty
+    } catch {
+      case e: NoSuchElementException => false
+    }
   }
 }
