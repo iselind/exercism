@@ -17,16 +17,16 @@ object MatchingBrackets {
   // isPaired will return true if all the parenthesis are matched properly,
   // otherwise false will be returned
   def isPaired(data: String): Boolean = {
-    var s = List[Char]()
+    var stack = List[Char]()
 
     try {
       for (c <- data) {
         c match {
-          case '(' | '[' | '{' => s = c :: s // Push c onto s
+          case '(' | '[' | '{' => stack = c :: stack // Push c onto stack
           case ')' | ']' | '}' => {
             // Pop the stack
-            val cShouldMatchWith = s.head
-            s = s.tail
+            val cShouldMatchWith = stack.head
+            stack = stack.tail
 
             val theChar = MatchingBrackets.matchingPairs.get(c)
             theChar match {
@@ -43,7 +43,7 @@ object MatchingBrackets {
           case _ =>
         }
       }
-      s.isEmpty
+      stack.isEmpty
     } catch {
       case e: NoSuchElementException => false
     }
