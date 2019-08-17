@@ -8,28 +8,23 @@ class BobTest extends FunSuite with Matchers {
   }
 
   test("shouting") {
-    pending
     Bob.response("WATCH OUT!") should be("Whoa, chill out!")
   }
 
   test("shouting gibberish") {
-    pending
     Bob.response("FCECDFCAAB") should be("Whoa, chill out!")
   }
 
   test("asking a question") {
-    pending
     Bob.response("Does this cryogenic chamber make me look fat?") should be(
       "Sure.")
   }
 
   test("asking a numeric question") {
-    pending
     Bob.response("You are, what, like 15?") should be("Sure.")
   }
 
   test("asking gibberish") {
-    pending
     Bob.response("fffbbcbeab?") should be("Sure.")
   }
 
