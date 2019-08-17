@@ -29,24 +29,20 @@ class BobTest extends FunSuite with Matchers {
   }
 
   test("talking forcefully") {
-    pending
     Bob.response("Let's go make out behind the gym!") should be("Whatever.")
   }
 
   test("using acronyms in regular speech") {
-    pending
     Bob.response("It's OK if you don't want to go to the DMV.") should be(
       "Whatever.")
   }
 
   test("forceful question") {
-    pending
     Bob.response("WHAT THE HELL WERE YOU THINKING?") should be(
       "Calm down, I know what I'm doing!")
   }
 
   test("shouting numbers") {
-    pending
     Bob.response("1, 2, 3 GO!") should be("Whoa, chill out!")
   }
 
