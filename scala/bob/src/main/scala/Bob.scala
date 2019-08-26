@@ -20,14 +20,8 @@ object Bob {
   def response(statement: String): String = {
     if (isQuiet(statement)) {
       "Fine. Be that way!"
-    } else if (isScreaming(statement)) {
-      if (!containLetters(statement)) {
-        if (isQuestion(statement)) {
-          "Sure."
-        } else {
-          "Whatever."
-        }
-      } else if (isQuestion(statement)) {
+    } else if (isScreaming(statement) && containLetters(statement)) {
+      if (isQuestion(statement)) {
         "Calm down, I know what I'm doing!"
       } else {
         "Whoa, chill out!"
