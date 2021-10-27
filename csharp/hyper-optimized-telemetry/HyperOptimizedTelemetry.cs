@@ -5,45 +5,38 @@ public static class TelemetryBuffer
     private static (bool signed, byte bytesRequired) calc(long reading)
     {
         byte width = 0;
-        if (reading < 0)
+        bool isSignedType = false;
+
+        if (reading <= short.MaxValue)
         {
-            if (reading >= sbyte.MinValue)
-            {
-                width = 8;
-            }
-            else if (reading >= short.MinValue)
-            {
-                width = 16;
-            }
-            else if (reading >= int.MinValue)
-            {
-                width = 32;
-            }
-            else if (reading >= long.MinValue)
-            {
-                width = 64;
-            }
+            isSignedType = true;
+            width = 16;
         }
-        else
+        else if (reading <= ushort.MaxValue)
         {
-            if (reading <= byte.MaxValue)
-            {
-                width = 8;
-            }
-            else if (reading <= ushort.MaxValue)
-            {
-                width = 16;
-            }
-            else if (reading <= uint.MaxValue)
-            {
-                width = 32;
-            }
-            else if (reading <= long.MaxValue)
-            {
-                width = 64;
-            }
+            isSignedType = false;
+            width = 16;
         }
-        return (reading < 0, (byte)(width / 8));
+        else if (reading <= int.MaxValue)
+        {
+            isSignedType = true;
+            width = 32;
+        }
+        else if (reading <= uint.MaxValue)
+        {
+            isSignedType = false;
+            width = 32;
+        }
+        else if (reading <= long.MaxValue)
+        {
+            isSignedType = true;
+            width = 64;
+        }
+
+        (bool signed, byte bytesRequired) result = (isSignedType, (byte)(width / 8));
+        Console.WriteLine("reading '{0}' is signed ({1}) and bytesRequired is ({2}/{3})",
+                reading, result.signed, result.bytesRequired, width);
+        return result;
     }
 
     public static byte[] ToBuffer(long reading)
