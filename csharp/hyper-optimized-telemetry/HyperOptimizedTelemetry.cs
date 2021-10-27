@@ -7,27 +7,27 @@ public static class TelemetryBuffer
         byte width = 0;
         bool isSignedType = false;
 
-        if (reading <= short.MaxValue)
+        if (reading <= short.MaxValue && reading >= short.MinValue)
         {
             isSignedType = true;
             width = 16;
         }
-        else if (reading <= ushort.MaxValue)
+        else if (reading <= ushort.MaxValue && reading >= ushort.MinValue)
         {
             isSignedType = false;
             width = 16;
         }
-        else if (reading <= int.MaxValue)
+        else if (reading <= int.MaxValue && reading >= int.MinValue)
         {
             isSignedType = true;
             width = 32;
         }
-        else if (reading <= uint.MaxValue)
+        else if (reading <= uint.MaxValue && reading >= uint.MinValue)
         {
             isSignedType = false;
             width = 32;
         }
-        else if (reading <= long.MaxValue)
+        else if (reading <= long.MaxValue && reading >= long.MinValue)
         {
             isSignedType = true;
             width = 64;
@@ -59,6 +59,10 @@ public static class TelemetryBuffer
         int idx = 1;
         foreach (byte v in val)
         {
+            if (reading < 0 && idx > meta.bytesRequired)
+            {
+                break;
+            }
             if (idx >= result.Length)
             {
                 break;

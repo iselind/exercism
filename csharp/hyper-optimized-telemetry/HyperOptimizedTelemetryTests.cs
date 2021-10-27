@@ -74,21 +74,21 @@ public class TelemetryBufferTests
         Assert.Equal(new byte[] { 0xfe, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_upper_neg_short()
     {
         var bytes = TelemetryBuffer.ToBuffer(-1);
         Assert.Equal(new byte[] { 0xfe, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_lower_neg_short()
     {
         var bytes = TelemetryBuffer.ToBuffer(Int16.MinValue);
         Assert.Equal(new byte[] { 0xfe, 0x0, 0x80, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_upper_neg_int()
     {
         int n = Int16.MinValue - 1;
@@ -96,21 +96,21 @@ public class TelemetryBufferTests
         Assert.Equal(new byte[] { 0xfc, 0xff, 0x7f, 0xff, 0xff, 0x0, 0x0, 0x0, 0x0 }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_lower_neg_int()
     {
         var bytes = TelemetryBuffer.ToBuffer(Int32.MinValue);
         Assert.Equal(new byte[] { 0xfc, 0x0, 0x0, 0x0, 0x80, 0x0, 0x0, 0x0, 0x0 }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_upper_neg_long()
     {
         var bytes = TelemetryBuffer.ToBuffer((long)Int32.MinValue - 1);
         Assert.Equal(new byte[] { 0xf8, 0xff, 0xff, 0xff, 0x7f, 0xff, 0xff, 0xff, 0xff }, bytes);
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     public void ToBuffer_lower_neg_long()
     {
         var bytes = TelemetryBuffer.ToBuffer(Int64.MinValue);
