@@ -88,7 +88,6 @@ public static class TelemetryBuffer
             case 4:
                 return BitConverter.ToUInt32(buffer, 1);
             default:
-                Console.WriteLine("default case chosen");
                 return 0;
         }
     }
