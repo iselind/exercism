@@ -34,8 +34,6 @@ public static class TelemetryBuffer
         }
 
         (bool signed, byte bytesRequired) result = (isSignedType, (byte)(width / 8));
-        Console.WriteLine("reading '{0}' is signed ({1}) and bytesRequired is ({2}/{3})",
-                reading, result.signed, result.bytesRequired, width);
         return result;
     }
 
@@ -72,12 +70,26 @@ public static class TelemetryBuffer
             idx++;
         }
 
-        Console.WriteLine("[{0}]", string.Join(", ", result));
         return result;
     }
 
     public static long FromBuffer(byte[] buffer)
     {
-        throw new NotImplementedException("Please implement the static TelemetryBuffer.FromBuffer() method");
+        switch (buffer[0])
+        {
+            case 1 + byte.MaxValue - 8:
+                return BitConverter.ToInt64(buffer, 1);
+            case 1 + byte.MaxValue - 4:
+                return BitConverter.ToInt32(buffer, 1);
+            case 1 + byte.MaxValue - 2:
+                return BitConverter.ToInt16(buffer, 1);
+            case 2:
+                return BitConverter.ToUInt16(buffer, 1);
+            case 4:
+                return BitConverter.ToUInt32(buffer, 1);
+            default:
+                Console.WriteLine("default case chosen");
+                return 0;
+        }
     }
 }

@@ -1,4 +1,5 @@
 all: test
+	git add .
 
 test: build
 	dotnet test .
