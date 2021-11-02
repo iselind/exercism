@@ -99,6 +99,7 @@ public static class Appointment
 
     public static DateTime NormalizeDateTime(string dtStr, Location location)
     {
-        throw new NotImplementedException("Please implement the (static) Appointment.NormalizeDateTime() method");
+        // dtStr is well formed for the specified location, so location should not make any difference.
+        return DateTime.Parse(dtStr);
     }
 }

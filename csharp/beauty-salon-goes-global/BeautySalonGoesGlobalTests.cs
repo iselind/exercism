@@ -155,7 +155,7 @@ public class BeautySalonGoesGlobalTests
                 Location.Paris));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(5)]
     public void NormalizeDateTime_newyork()
     {
@@ -164,7 +164,7 @@ public class BeautySalonGoesGlobalTests
                 Location.NewYork));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(5)]
     public void NormalizeDateTime_london()
     {
