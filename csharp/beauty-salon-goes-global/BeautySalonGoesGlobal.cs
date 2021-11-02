@@ -88,9 +88,13 @@ public static class Appointment
 
     public static bool HasDaylightSavingChanged(DateTime dt, Location location)
     {
-        dt = TimeZoneInfo.ConvertTimeToUtc(dt, LocationToTimeZone(location));
         DateTime sevenDaysAgo = dt.Subtract(TimeSpan.FromDays(7));
-        return sevenDaysAgo.IsDaylightSavingTime() != dt.IsDaylightSavingTime();
+
+        // Make sure both DateTimes are converted back to UTC from location
+        dt = TimeZoneInfo.ConvertTimeToUtc(dt, LocationToTimeZone(location));
+        sevenDaysAgo = TimeZoneInfo.ConvertTimeToUtc(sevenDaysAgo, LocationToTimeZone(location));
+
+        return dt.Hour != sevenDaysAgo.Hour;
     }
 
     public static DateTime NormalizeDateTime(string dtStr, Location location)

@@ -83,7 +83,7 @@ public class BeautySalonGoesGlobalTests
                 Location.NewYork));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_newyork_inactive()
     {
@@ -92,7 +92,7 @@ public class BeautySalonGoesGlobalTests
                 Location.NewYork));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_newyork_no_change()
     {
@@ -101,7 +101,7 @@ public class BeautySalonGoesGlobalTests
                 Location.NewYork));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_london_active()
     {
@@ -110,7 +110,7 @@ public class BeautySalonGoesGlobalTests
                 Location.London));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_london_inactive()
     {
@@ -119,7 +119,7 @@ public class BeautySalonGoesGlobalTests
                 Location.London));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_london_no_change()
     {
@@ -128,7 +128,7 @@ public class BeautySalonGoesGlobalTests
                 Location.London));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_paris_active()
     {
@@ -137,7 +137,7 @@ public class BeautySalonGoesGlobalTests
                 Location.Paris));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_paris_inactive()
     {
@@ -146,7 +146,7 @@ public class BeautySalonGoesGlobalTests
                 Location.Paris));
     }
 
-    [Fact(Skip = "foo")]
+    [Fact]
     [Task(4)]
     public void DaylightSavingChanged_paris_no_change()
     {
